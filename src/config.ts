@@ -58,14 +58,14 @@ export const COPY = {
     missingProof: "missing proof",
   },
   scene3: {
-    headline: "Akave changes the model.",
+    headline: "Akave Cloud changes the model.",
   },
   scene4: {
     // Beat headlines (VO lines)
     price: "$14.99 / TB",
     egress: "Zero egress fees.",
     s3: "S3-compatible from day one.",
-    proof: "A proof ledger you can verify yourself.",
+    proof: "Verifiable storage you can verify yourself.",
     // Sub-labels beneath each beat diagram
     priceSub: "Flat rate. No surprises.",
     egressSub: "Move out. No charge.",
@@ -80,19 +80,36 @@ export const COPY = {
   scene5: {
     // Beat headlines (VO lines)
     move: "Move data when you want.",
-    cost: "Know the cost before the month begins.",
-    proof: "Show what happened, with proof.",
+    cost: "Predictable pricing.",
+    proof: "Verifiable storage.",
     // Price display in the cost beat
     costPrice: "$14.99",
     costUnit: "/ TB / month",
   },
   scene6: {
-    p1: "Predictable pricing.",
-    p2: "Verifiable storage.",
-    p3: "Exit on your terms.",
+    p1: "Run AI without lock-in.",
+    p2: "Own your data.",
+    p3: "A modern S3-Compatible object storage.",
   },
   scene7: {
-    brand: "Akave",
-    tagline: "Predictable. Verifiable. Yours.",
+    brand: "Akave Cloud",
+    tagline: "The Al-Ready Sovereign Cloud.",
+  },
+
+  // ---- Standalone concept compositions ------------------------
+  // Copy for demo compositions (separate from main explainer).
+  // Both concepts also reuse COPY.scene7.brand for the end card.
+  concept1: {
+    headline: "Sovereign Storage,\nPredictable Pricing",
+    priceSub: "Flat rate. No egress fees.",
+  },
+  concept8: {
+    // Individual price parts — each animates in separately
+    priceDollar: "$",
+    priceWhole: "14",
+    priceDot: ".",
+    priceCents: "99",
+    priceUnit: "/ TB",
+    sub: "Flat rate. No surprises. No egress fees.",
   },
 } as const;

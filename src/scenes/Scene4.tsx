@@ -9,7 +9,8 @@
 //   Beat 3  128–192 S3 marker snaps in
 //   Beat 4  192–255 Proof ledger resolves
 //
-// Akave tile persists at top-center throughout.
+// No logo/tile in this scene — product claims speak for themselves.
+// Logo appears once in Scene 3 (model shift) and once in Scene 7 (end card).
 // ================================================================
 
 import {
@@ -21,7 +22,6 @@ import {
   useVideoConfig,
 } from "remotion";
 import { COLORS, COPY } from "../config";
-import { AkaveTile } from "../primitives/AkaveTile";
 import { ExitFrame } from "../primitives/ExitFrame";
 import { LedgerLine } from "../primitives/LedgerLine";
 import { SceneContainer } from "../primitives/SceneContainer";
@@ -49,9 +49,6 @@ export const Scene4 = () => {
   const b2 = bv(frame, BEAT, BEAT * 2);
   const b3 = bv(frame, BEAT * 2, BEAT * 3);
   const b4 = bvOpen(frame, BEAT * 3);
-
-  // Akave tile — always visible
-  const tileIn = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 18 });
 
   // ---- Beat 1: Price ----
   // Counts down rapidly from a high number then snaps to 14.99
@@ -118,24 +115,11 @@ export const Scene4 = () => {
 
   return (
     <SceneContainer>
-      {/* Akave tile — top anchor */}
-      <AbsoluteFill
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          paddingTop: 88,
-          opacity: interpolate(tileIn, [0, 1], [0, 1]),
-        }}
-      >
-        <AkaveTile width={200} height={60} />
-      </AbsoluteFill>
-
       {/* ================================================================
           BEAT 1 — $14.99 / TB
       ================================================================ */}
       <AbsoluteFill
-        style={{ opacity: b1, ...diagramStyle, flexDirection: "column", paddingTop: 60 }}
+        style={{ opacity: b1, ...diagramStyle, flexDirection: "column" }}
       >
         <div
           style={{
@@ -156,7 +140,6 @@ export const Scene4 = () => {
           opacity: b2,
           ...diagramStyle,
           flexDirection: "column",
-          paddingTop: 60,
         }}
       >
         <div style={{ ...claimStyle }}>{COPY.scene4.egress}</div>
@@ -177,7 +160,7 @@ export const Scene4 = () => {
           BEAT 3 — S3-compatible
       ================================================================ */}
       <AbsoluteFill
-        style={{ opacity: b3, ...diagramStyle, flexDirection: "column", paddingTop: 60 }}
+        style={{ opacity: b3, ...diagramStyle, flexDirection: "column" }}
       >
         <div style={claimStyle}>{COPY.scene4.s3}</div>
         {/* S3 badge */}
@@ -220,7 +203,7 @@ export const Scene4 = () => {
           BEAT 4 — Proof ledger
       ================================================================ */}
       <AbsoluteFill
-        style={{ opacity: b4, ...diagramStyle, flexDirection: "column", paddingTop: 60 }}
+        style={{ opacity: b4, ...diagramStyle, flexDirection: "column" }}
       >
         <div style={{ ...claimStyle, fontSize: 58, maxWidth: 860 }}>
           {COPY.scene4.proof}

@@ -65,14 +65,15 @@ export const Scene6 = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 32,
+        // Tighter gap keeps the three lines reading as one cohesive block
+        gap: 24,
         fontFamily,
       }}
     >
       <div style={mkStyle(line1In, p1Dim)}>{COPY.scene6.p1}</div>
       <div style={mkStyle(line2In, p2Dim)}>{COPY.scene6.p2}</div>
-      {/* p3 is a longer string — 48px keeps it on one line */}
-      <div style={mkStyle(line3In, false, 48)}>{COPY.scene6.p3}</div>
+      {/* p3 is a longer descriptor string — 52px balances it against the lines above */}
+      <div style={mkStyle(line3In, false, 52)}>{COPY.scene6.p3}</div>
     </AbsoluteFill>
   );
 };

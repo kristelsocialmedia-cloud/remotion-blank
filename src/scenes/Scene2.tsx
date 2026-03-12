@@ -96,6 +96,9 @@ export const Scene2 = () => {
     color: COLORS.white,
     letterSpacing: "-0.022em",
     textAlign: "center",
+    // pre-line: respects \n in copy strings without collapsing whitespace
+    whiteSpace: "pre-line",
+    lineHeight: 1.25,
   };
 
   return (

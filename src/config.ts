@@ -42,12 +42,14 @@ export const TOTAL_FRAMES = 930;
 // No user-visible text should be hardcoded inside scene files.
 export const COPY = {
   scene1: {
-    in: "You don't notice the problem\nwhen data goes in.",
+    // \n sets a controlled line break — Scene 1 uses split("\n") to render
+    in: "You don't notice the problem\nwhen data goes in the cloud.",
     out: "You notice it\nwhen you need it back.",
   },
   scene2: {
     // Beat headlines (VO lines)
-    beat1: "The bill jumps.",
+    // \n in beat1 prevents canvas overflow at 58px — Scene2 uses whiteSpace: pre-line
+    beat1: "Your cloud bill jumps\nwhen you need data back.",
     beat2: "The audit turns into guesswork.",
     beat3: "And every exit gets taxed on the way out.",
     // Invoice card labels
@@ -81,7 +83,7 @@ export const COPY = {
     // Beat headlines (VO lines)
     move: "Move data when you want.",
     cost: "Predictable pricing.",
-    proof: "Verifiable storage.",
+    proof: "Verifiable object storage.",
     // Price display in the cost beat
     costPrice: "$14.99",
     costUnit: "/ TB / month",

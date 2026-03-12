@@ -122,10 +122,10 @@ export const Scene5 = () => {
               letterSpacing: "-0.03em",
             }}
           >
-            $14.99
+            {COPY.scene5.costPrice}
           </span>
           <span style={{ fontFamily, fontSize: 20, fontWeight: 400, color: COLORS.whiteDim }}>
-            / TB / month
+            {COPY.scene5.costUnit}
           </span>
         </div>
       </AbsoluteFill>

@@ -60,7 +60,7 @@ export const Scene4 = () => {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.exp),
   });
-  const priceValue = interpolate(priceCountProgress, [0, 1], [89.99, 14.99]);
+  const priceValue = interpolate(priceCountProgress, [0, 1], [89.99, COPY.scene4.priceTarget]);
   const priceSnapped = priceCountProgress >= 1;
   const lockIn = spring({
     frame: frame - 42,
@@ -143,9 +143,9 @@ export const Scene4 = () => {
             transform: priceSnapped ? `scale(${lockScale})` : "scale(1)",
           }}
         >
-          ${priceValue.toFixed(2)} / TB
+          ${priceValue.toFixed(2)} {COPY.scene4.priceUnit}
         </div>
-        <div style={subStyle}>Flat rate. No surprises.</div>
+        <div style={subStyle}>{COPY.scene4.priceSub}</div>
       </AbsoluteFill>
 
       {/* ================================================================
@@ -170,7 +170,7 @@ export const Scene4 = () => {
         >
           <ExitFrame size={90} color={COLORS.highlight} />
         </div>
-        <div style={{ ...subStyle, marginTop: 20 }}>Move out. No charge.</div>
+        <div style={{ ...subStyle, marginTop: 20 }}>{COPY.scene4.egressSub}</div>
       </AbsoluteFill>
 
       {/* ================================================================
@@ -209,11 +209,11 @@ export const Scene4 = () => {
               letterSpacing="0.08em"
               fontFamily={fontFamily}
             >
-              S3
+              {COPY.scene4.s3Badge}
             </text>
           </svg>
         </div>
-        <div style={{ ...subStyle, marginTop: 20 }}>Drop-in compatible.</div>
+        <div style={{ ...subStyle, marginTop: 20 }}>{COPY.scene4.s3Sub}</div>
       </AbsoluteFill>
 
       {/* ================================================================
@@ -241,7 +241,7 @@ export const Scene4 = () => {
           />
         </div>
         <div style={{ ...subStyle, marginTop: 20, color: resolveProgress > 0.6 ? "#7AFFC4" : COLORS.whiteDim }}>
-          {resolveProgress > 0.6 ? "✓ Verified" : "Verifying..."}
+          {resolveProgress > 0.6 ? COPY.scene4.proofVerified : COPY.scene4.proofVerifying}
         </div>
       </AbsoluteFill>
     </SceneContainer>

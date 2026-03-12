@@ -141,7 +141,7 @@ export const Scene2 = () => {
               marginBottom: 14,
             }}
           >
-            INVOICE
+            {COPY.scene2.invoiceLabel}
           </div>
           <div
             style={{
@@ -195,8 +195,8 @@ export const Scene2 = () => {
               color: COLORS.whiteDim,
             }}
           >
-            <span>Storage</span>
-            <span style={{ color: COLORS.pain }}>+ Egress ↑</span>
+            <span>{COPY.scene2.storageLabel}</span>
+            <span style={{ color: COLORS.pain }}>{COPY.scene2.egressLabel}</span>
           </div>
         </div>
       </AbsoluteFill>
@@ -240,7 +240,7 @@ export const Scene2 = () => {
               whiteSpace: "nowrap",
             }}
           >
-            missing proof
+            {COPY.scene2.missingProof}
           </div>
         </div>
       </AbsoluteFill>

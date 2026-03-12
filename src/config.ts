@@ -38,29 +38,53 @@ export const TRANSITION_FRAMES = 20;
 export const TOTAL_FRAMES = 930;
 
 // ---- VO copy — edit text here -----------------------------------
+// Every string that appears on screen lives in this object.
+// No user-visible text should be hardcoded inside scene files.
 export const COPY = {
   scene1: {
     in: "You don't notice the problem\nwhen data goes in.",
     out: "You notice it\nwhen you need it back.",
   },
   scene2: {
+    // Beat headlines (VO lines)
     beat1: "The bill jumps.",
     beat2: "The audit turns into guesswork.",
     beat3: "And every exit gets taxed on the way out.",
+    // Invoice card labels
+    invoiceLabel: "INVOICE",
+    storageLabel: "Storage",
+    egressLabel: "+ Egress ↑",
+    // Ledger annotation
+    missingProof: "missing proof",
   },
   scene3: {
     headline: "Akave changes the model.",
   },
   scene4: {
+    // Beat headlines (VO lines)
     price: "$14.99 / TB",
     egress: "Zero egress fees.",
     s3: "S3-compatible from day one.",
     proof: "A proof ledger you can verify yourself.",
+    // Sub-labels beneath each beat diagram
+    priceSub: "Flat rate. No surprises.",
+    egressSub: "Move out. No charge.",
+    s3Badge: "S3",              // text inside the S3 badge
+    s3Sub: "Drop-in compatible.",
+    proofVerifying: "Verifying...",
+    proofVerified: "✓ Verified",
+    // Numeric target used for the price count-down animation
+    priceTarget: 14.99,
+    priceUnit: "/ TB",
   },
   scene5: {
+    // Beat headlines (VO lines)
     move: "Move data when you want.",
     cost: "Know the cost before the month begins.",
     proof: "Show what happened, with proof.",
+    // Price display in the cost beat
+    costPrice: "$14.99",
+    costUnit: "/ TB / month",
   },
   scene6: {
     p1: "Predictable pricing.",

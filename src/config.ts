@@ -23,7 +23,7 @@ export const FPS = 30;
 export const SCENE_FRAMES = {
   s1: 135,  // Scene 1 — Invisible Problem   (4.5 s)
   s2: 225,  // Scene 2 — Pain Escalation     (7.5 s)
-  s3: 75,   // Scene 3 — Model Shift         (2.5 s)
+  // s3 removed — Scene3.tsx kept in /scenes for reference
   s4: 255,  // Scene 4 — Product Proof       (8.5 s)
   s5: 165,  // Scene 5 — Outcome Relief      (5.5 s)
   s6: 135,  // Scene 6 — Closing Promise     (4.5 s)
@@ -34,8 +34,9 @@ export const SCENE_FRAMES = {
 export const TRANSITION_FRAMES = 20;
 
 // Total composition duration (auto-calculated; keep in sync with Root.tsx)
-// = sum(SCENE_FRAMES) − 6 × TRANSITION_FRAMES  = 1050 − 120 = 930
-export const TOTAL_FRAMES = 930;
+// 6 scenes, 5 transitions:
+// = (135+225+255+165+135+60) − 5 × 20  = 975 − 100 = 875 frames (29.2 s)
+export const TOTAL_FRAMES = 875;
 
 // ---- VO copy — edit text here -----------------------------------
 // Every string that appears on screen lives in this object.

@@ -1,15 +1,17 @@
 // ================================================================
 // AKAVE EXPLAINER — Master Composition
 //
-// Sequences all 7 scenes with cross-fade transitions.
+// Sequences 6 scenes with cross-fade transitions.
+// Scene 3 (Model Shift) removed — pain flows directly into product proof.
 //
 // Total duration calculation:
-//   Sum of scene frames : 135+225+75+255+165+135+60 = 1050
-//   Minus 6 × 20 (transitions) = −120
-//   Total = 930 frames = 31 s at 30 fps
+//   Sum of scene frames : 135+225+255+165+135+60 = 975
+//   Minus 5 × 20 (transitions) = −100
+//   Total = 875 frames = 29.2 s at 30 fps
 //
 // To adjust a scene duration, change the matching value in
 // src/config.ts (SCENE_FRAMES) AND update TOTAL_FRAMES.
+// Scene3.tsx is kept in /scenes in case it needs to be restored.
 // ================================================================
 
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
@@ -17,7 +19,6 @@ import { fade } from "@remotion/transitions/fade";
 import { SCENE_FRAMES, TRANSITION_FRAMES } from "./config";
 import { Scene1 } from "./scenes/Scene1";
 import { Scene2 } from "./scenes/Scene2";
-import { Scene3 } from "./scenes/Scene3";
 import { Scene4 } from "./scenes/Scene4";
 import { Scene5 } from "./scenes/Scene5";
 import { Scene6 } from "./scenes/Scene6";
@@ -45,13 +46,7 @@ export const AkaveExplainer = () => (
     </TransitionSeries.Sequence>
     {transition}
 
-    {/* Scene 3 — Model Shift */}
-    <TransitionSeries.Sequence durationInFrames={SCENE_FRAMES.s3}>
-      <Scene3 />
-    </TransitionSeries.Sequence>
-    {transition}
-
-    {/* Scene 4 — Product Proof */}
+    {/* Scene 4 — Product Proof (follows directly from pain) */}
     <TransitionSeries.Sequence durationInFrames={SCENE_FRAMES.s4}>
       <Scene4 />
     </TransitionSeries.Sequence>

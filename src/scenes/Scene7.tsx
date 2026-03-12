@@ -2,27 +2,36 @@
 // SCENE 7 — Brand End Card  (60 frames / 2.0 s)
 // VO: "That's Akave."
 //
+// Uses the real Akave Cloud logo (white version, transparent bg).
+// Logo file: public/akave-logo-white.png
+//
 // TIMING:
-//   0–28  "Akave" wordmark scales and fades in
+//   0–28  Logo scales and fades in
+//  20–48  Tagline fades up
 //  28–60  Hold
 // ================================================================
 
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import { COLORS, COPY } from "../config";
 import { fontFamily } from "../font";
 
+// Logo display width in pixels — adjust to taste
+const LOGO_WIDTH = 300;
+
 export const Scene7 = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const wordmarkIn = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 28 });
-  const taglineIn = spring({ frame: frame - 20, fps, config: { damping: 200 }, durationInFrames: 20 });
+  const logoIn = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 28 });
+  const taglineIn = spring({ frame: frame - 20, fps, config: { damping: 200 }, durationInFrames: 22 });
 
   return (
     <AbsoluteFill
@@ -32,25 +41,20 @@ export const Scene7 = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 20,
+        gap: 28,
         fontFamily,
       }}
     >
-      {/* Wordmark */}
-      <div
+      {/* Akave Cloud logo — white version on dark background */}
+      <Img
+        src={staticFile("akave-logo-white.png")}
         style={{
-          fontFamily,
-          fontSize: 96,
-          fontWeight: 300,
-          color: COLORS.white,
-          letterSpacing: "0.12em",
-          opacity: interpolate(wordmarkIn, [0, 1], [0, 1]),
-          transform: `scale(${interpolate(wordmarkIn, [0, 1], [0.88, 1])})`,
-          lineHeight: 1,
+          width: LOGO_WIDTH,
+          // height auto-scales with aspect ratio
+          opacity: interpolate(logoIn, [0, 1], [0, 1]),
+          transform: `scale(${interpolate(logoIn, [0, 1], [0.88, 1])})`,
         }}
-      >
-        {COPY.scene7.brand}
-      </div>
+      />
 
       {/* Tagline */}
       <div
@@ -62,20 +66,21 @@ export const Scene7 = () => {
           letterSpacing: "0.08em",
           opacity: interpolate(taglineIn, [0, 1], [0, 1]),
           transform: `translateY(${interpolate(taglineIn, [0, 1], [10, 0])}px)`,
+          textAlign: "center",
         }}
       >
         {COPY.scene7.tagline}
       </div>
 
-      {/* Thin accent rule under wordmark */}
+      {/* Thin accent rule — appears with tagline */}
       <div
         style={{
           position: "absolute",
-          bottom: 240,
-          width: 240,
+          bottom: 80,
+          width: 48,
           height: 1,
           background: COLORS.highlight,
-          opacity: interpolate(taglineIn, [0, 1], [0, 0.3]),
+          opacity: interpolate(taglineIn, [0, 1], [0, 0.35]),
         }}
       />
     </AbsoluteFill>

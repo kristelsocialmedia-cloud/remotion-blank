@@ -1,13 +1,15 @@
 // ================================================================
 // SCENE 6 — Closing Promise  (135 frames / 4.5 s)
-// VO: "Predictable pricing. / Verifiable storage. / Exit on your terms."
+// VO: "Run AI without lock-in. / Own your data. /
+//      A modern S3-Compatible object storage."
 //
 // Pure typography. Three lines appear sequentially — no competing visuals.
+// NOTE: p3 uses a smaller font size (48px) because it is a longer string.
 //
 // TIMING:
-//   0–15   Line 1 "Predictable pricing."
-//   42–57  Line 2 "Verifiable storage."
-//   84–99  Line 3 "Exit on your terms."
+//   0–15   Line 1 "Run AI without lock-in."
+//   42–57  Line 2 "Own your data."
+//   84–99  Line 3 "A modern S3-Compatible object storage."
 // ================================================================
 
 import {
@@ -28,9 +30,11 @@ export const Scene6 = () => {
   const line2In = spring({ frame: frame - 42, fps, config: { damping: 200 }, durationInFrames: 22 });
   const line3In = spring({ frame: frame - 84, fps, config: { damping: 200 }, durationInFrames: 22 });
 
-  const mkStyle = (progress: number, dim: boolean): React.CSSProperties => ({
+  // size defaults to 68; pass a smaller value for longer strings to keep
+  // every line on a single row within the 1280px canvas.
+  const mkStyle = (progress: number, dim: boolean, size = 68): React.CSSProperties => ({
     fontFamily,
-    fontSize: 68,
+    fontSize: size,
     fontWeight: 300,
     color: dim ? COLORS.whiteDim : COLORS.white,
     letterSpacing: "-0.025em",
@@ -38,6 +42,7 @@ export const Scene6 = () => {
     opacity: interpolate(progress, [0, 1], [0, 1]),
     transform: `translateY(${interpolate(progress, [0, 1], [18, 0])}px)`,
     textAlign: "center",
+    maxWidth: 1100, // safety net for unexpectedly long strings
   });
 
   // The first two lines subtly dim once the next line appears
@@ -66,7 +71,8 @@ export const Scene6 = () => {
     >
       <div style={mkStyle(line1In, p1Dim)}>{COPY.scene6.p1}</div>
       <div style={mkStyle(line2In, p2Dim)}>{COPY.scene6.p2}</div>
-      <div style={mkStyle(line3In, false)}>{COPY.scene6.p3}</div>
+      {/* p3 is a longer string — 48px keeps it on one line */}
+      <div style={mkStyle(line3In, false, 48)}>{COPY.scene6.p3}</div>
     </AbsoluteFill>
   );
 };

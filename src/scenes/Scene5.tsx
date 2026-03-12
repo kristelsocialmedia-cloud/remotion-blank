@@ -1,12 +1,15 @@
 // ================================================================
 // SCENE 5 — Outcome Relief  (165 frames / 5.5 s)
-// VO: "Move data when you want. / Know the cost before the month begins. /
-//      Show what happened, with proof."
+// VO: "Move data when you want. / Predictable pricing. /
+//      Verifiable storage."
 //
 // Three beats — 55 frames each:
 //   Beat 1  0–55    Move freely — open exit path
-//   Beat 2  55–110  Know the cost — stable price display
-//   Beat 3  110–165 Show the proof — complete ledger
+//   Beat 2  55–110  Predictable pricing — stable price display
+//   Beat 3  110–165 Verifiable storage — complete resolved ledger
+//
+// NOTE: Beat 2 and 3 headlines are short strings; they use a larger
+// font size (80px) and a tighter gap to keep the layout balanced.
 // ================================================================
 
 import {
@@ -86,7 +89,8 @@ export const Scene5 = () => {
       </AbsoluteFill>
 
       {/* ================================================================
-          BEAT 2 — Know the cost
+          BEAT 2 — Predictable pricing
+          Short string → larger type (80px) + tighter gap
       ================================================================ */}
       <AbsoluteFill
         style={{
@@ -95,10 +99,10 @@ export const Scene5 = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 40,
+          gap: 24,
         }}
       >
-        <div style={claimStyle}>{COPY.scene5.cost}</div>
+        <div style={{ ...claimStyle, fontSize: 80 }}>{COPY.scene5.cost}</div>
         {/* Fixed price display */}
         <div
           style={{
@@ -131,7 +135,8 @@ export const Scene5 = () => {
       </AbsoluteFill>
 
       {/* ================================================================
-          BEAT 3 — Show the proof
+          BEAT 3 — Verifiable storage
+          Short string → larger type (80px) + tighter gap
       ================================================================ */}
       <AbsoluteFill
         style={{
@@ -140,10 +145,10 @@ export const Scene5 = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 40,
+          gap: 24,
         }}
       >
-        <div style={claimStyle}>{COPY.scene5.proof}</div>
+        <div style={{ ...claimStyle, fontSize: 80 }}>{COPY.scene5.proof}</div>
         <div
           style={{
             opacity: interpolate(ledgerIn, [0, 1], [0, 1]),

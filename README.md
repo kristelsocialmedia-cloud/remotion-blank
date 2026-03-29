@@ -1,54 +1,38 @@
-# Remotion video
+# Claude Code – Client Workspace
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-dark.apng">
-      <img alt="Animated Remotion Logo" src="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-light.gif">
-    </picture>
-  </a>
-</p>
+Multi-client creative production workspace managed with Claude Code.
 
-Welcome to your Remotion project!
+## Structure
 
-## Commands
+```
+clients/
+  akave/
+    remotion/       ← Remotion video project (React, TypeScript)
+    references/     ← Brand guides, research, source docs
+    assets/         ← Logos, fonts, images, audio
+    copy/           ← Scripts, headlines, body copy
+    strategy/       ← Briefs, decks, positioning docs
+    deliverables/   ← Final approved outputs
+  send/             ← Future client (same structure)
+  hyatt/            ← Future client (same structure)
 
-**Install Dependencies**
-
-```console
-npm i
+shared/
+  templates/        ← Reusable Remotion/design templates
+  prompts/          ← Claude prompts for recurring tasks
+  scripts/          ← Shared utility scripts (PDF extraction, etc.)
 ```
 
-**Start Preview**
+## Getting Started – Akave Remotion Project
 
-```console
-npm run dev
+```bash
+cd clients/akave/remotion
+npm install        # first time only
+npm run dev        # open Remotion Studio
+npm run render:explainer
 ```
 
-**Render video**
+## Adding a New Client
 
-```console
-npx remotion render
-```
-
-**Upgrade Remotion**
-
-```console
-npx remotion upgrade
-```
-
-## Docs
-
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help on our [Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+1. `mkdir -p clients/<name>/{remotion,copy,strategy,assets,references,deliverables}`
+2. Scaffold the Remotion project if needed: `npx create-video@latest`
+3. Drop brand assets into `clients/<name>/references/`

@@ -1,7 +1,18 @@
-node_modules
-dist
+# OS
 .DS_Store
-.env
+Thumbs.db
 
-# Ignore the output video from Git but not videos you import into src/.
-out
+# Environment
+.env
+.env.*
+
+# Node (nested projects manage their own node_modules)
+node_modules/
+
+# Build / render output
+dist/
+out/
+
+# Editor cruft
+*.swp
+*.swo

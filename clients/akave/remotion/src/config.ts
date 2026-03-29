@@ -24,7 +24,7 @@ export const SCENE_FRAMES = {
   s1: 135,  // Scene 1 — Invisible Problem   (4.5 s)
   s2: 225,  // Scene 2 — Pain Escalation     (7.5 s)
   // s3 removed — Scene3.tsx kept in /scenes for reference
-  s4: 220,  // Scene 4 — Product Proof       (7.3 s)
+  s4: 256,  // Scene 4 — Product Introduction (8.5 s)
   s5: 195,  // Scene 5 — Outcome Relief      (6.5 s)
   s6: 165,  // Scene 6 — Closing Promise     (5.5 s)
   s7: 90,   // Scene 7 — Brand End Card      (3.0 s)
@@ -35,8 +35,8 @@ export const TRANSITION_FRAMES = 20;
 
 // Total composition duration (auto-calculated; keep in sync with Root.tsx)
 // 6 scenes, 5 transitions:
-// = (135+225+220+195+165+90) − 5 × 20  = 1030 − 100 = 930 frames (31.0 s)
-export const TOTAL_FRAMES = 930;
+// = (135+225+256+195+165+90) − 5 × 20  = 1066 − 100 = 966 frames (32.2 s)
+export const TOTAL_FRAMES = 966;
 
 // ---- VO copy — edit text here -----------------------------------
 // Every string that appears on screen lives in this object.
@@ -44,15 +44,16 @@ export const TOTAL_FRAMES = 930;
 export const COPY = {
   scene1: {
     // \n sets a controlled line break — Scene 1 uses split("\n") to render
-    in: "You don't notice the problem\nwhen you move data in.",
-    out: "You notice it when you\nmove data out of the cloud.",
+    in: "You don't notice the problem when you move data in.",
+    out: "You notice it when you move data out of the cloud.",
   },
   scene2: {
     // Beat headlines (VO lines)
-    // \n in beat1 prevents canvas overflow at 58px — Scene2 uses whiteSpace: pre-line
+    // \n in beat1 prevents canvas overflow at 68px — Scene2 uses whiteSpace: pre-line
     beat1: "Your cloud bill jumps\nwhen you need data back.",
     beat2: "The audit turns into guesswork.",
-    beat3: "And every exit gets taxed on the way out.",
+    // \n forces a clean 2-line break at 68px
+    beat3: "And every exit gets taxed\non the way out.",
     // Invoice card labels
     invoiceLabel: "INVOICE",
     storageLabel: "Storage",
@@ -64,21 +65,15 @@ export const COPY = {
     headline: "Akave Cloud changes the model.",
   },
   scene4: {
-    // Beat headlines (VO lines)
-    price: "$14.99 / TB",
+    // Beat headlines (VO lines) — four beats
+    meet: "Meet Akave Cloud",
     egress: "Zero egress fees.",
-    s3: "S3-compatible from day one.",
-    proof: "Verifiable storage you can verify yourself.",
+    savings: "Save up to 80% vs. hyperscalers.",
+    freedom: "Move data as often as you want.",
     // Sub-labels beneath each beat diagram
-    priceSub: "Flat rate. No surprises.",
     egressSub: "Move out. No charge.",
-    s3Badge: "S3",              // text inside the S3 badge
-    s3Sub: "Drop-in compatible.",
-    proofVerifying: "Verifying...",
-    proofVerified: "✓ Verified",
-    // Numeric target used for the price count-down animation
-    priceTarget: 14.99,
-    priceUnit: "/ TB",
+    savingsSub: "Compared to AWS S3, GCP, Azure.",
+    freedomSub: "Any time. Any frequency.",
   },
   scene5: {
     // Beat headlines (VO lines)
@@ -91,8 +86,8 @@ export const COPY = {
   },
   scene6: {
     p1: "Run AI without lock-in.",
-    p2: "Own your data.",
-    p3: "A modern S3-Compatible object storage.",
+    p2: "Save up 80%.",
+    p3: "Own your data.",
   },
   scene7: {
     brand: "Akave Cloud",

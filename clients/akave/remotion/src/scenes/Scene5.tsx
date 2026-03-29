@@ -51,6 +51,16 @@ export const Scene5 = () => {
   const costIn = spring({ frame: frame - BEAT, fps, config: { damping: 200 }, durationInFrames: 22 });
   const ledgerIn = spring({ frame: frame - BEAT * 2, fps, config: { damping: 200 }, durationInFrames: 22 });
 
+  // Headline pinned at top: 120 — consistent with Scene 2 and Scene 4
+  const headlineWrap: React.CSSProperties = {
+    position: "absolute",
+    top: 120,
+    left: 0,
+    right: 0,
+    display: "flex",
+    justifyContent: "center",
+  };
+
   const claimStyle: React.CSSProperties = {
     fontFamily,
     fontSize: 68,
@@ -59,55 +69,48 @@ export const Scene5 = () => {
     letterSpacing: "-0.025em",
     textAlign: "center",
     lineHeight: 1.25,
-    maxWidth: 860,
+    maxWidth: 900,
   };
+
+  const diagramTop = 360;
 
   return (
     <SceneContainer>
       {/* ================================================================
           BEAT 1 — Move freely
       ================================================================ */}
-      <AbsoluteFill
-        style={{
-          opacity: b1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 40,
-        }}
-      >
-        <div style={claimStyle}>{COPY.scene5.move}</div>
+      <AbsoluteFill style={{ opacity: b1 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene5.move}</div>
+        </div>
         <div
           style={{
-            opacity: interpolate(exitIn, [0, 1], [0, 1]),
-            transform: `scale(${interpolate(exitIn, [0, 1], [0.8, 1])})`,
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(exitIn, [0, 1], [0.8, 1])})`,
+            opacity: exitIn,
           }}
         >
-          <ExitFrame size={96} color={COLORS.highlight} blocked={false} />
+          <ExitFrame size={90} color={COLORS.highlight} blocked={false} />
         </div>
       </AbsoluteFill>
 
       {/* ================================================================
           BEAT 2 — Predictable pricing
-          Short string → larger type (80px) + tighter gap
       ================================================================ */}
-      <AbsoluteFill
-        style={{
-          opacity: b2,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 24,
-        }}
-      >
-        <div style={{ ...claimStyle, fontSize: 80 }}>{COPY.scene5.cost}</div>
+      <AbsoluteFill style={{ opacity: b2 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene5.cost}</div>
+        </div>
         {/* Fixed price display */}
         <div
           style={{
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(costIn, [0, 1], [0.85, 1])})`,
             opacity: interpolate(costIn, [0, 1], [0, 1]),
-            transform: `scale(${interpolate(costIn, [0, 1], [0.85, 1])})`,
             background: "rgba(255,255,255,0.04)",
             border: "1.5px solid rgba(176,229,255,0.18)",
             borderRadius: 16,
@@ -136,23 +139,18 @@ export const Scene5 = () => {
 
       {/* ================================================================
           BEAT 3 — Verifiable storage
-          Short string → larger type (80px) + tighter gap
       ================================================================ */}
-      <AbsoluteFill
-        style={{
-          opacity: b3,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 24,
-        }}
-      >
-        <div style={{ ...claimStyle, fontSize: 80 }}>{COPY.scene5.proof}</div>
+      <AbsoluteFill style={{ opacity: b3 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene5.proof}</div>
+        </div>
         <div
           style={{
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(ledgerIn, [0, 1], [0.88, 1])})`,
             opacity: interpolate(ledgerIn, [0, 1], [0, 1]),
-            transform: `scale(${interpolate(ledgerIn, [0, 1], [0.88, 1])})`,
           }}
         >
           <LedgerLine

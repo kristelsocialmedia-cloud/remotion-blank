@@ -1,28 +1,29 @@
 // ================================================================
-// SCENE 4 — Product Proof  (220 frames / 7.3 s)
-// VO: "Zero egress fees. S3-compatible from day one.
-//      Verifiable storage you can verify yourself."
+// SCENE 4 — Product Introduction  (256 frames / 8.5 s)
+// VO: "Meet Akave Cloud. / Zero egress fees. /
+//      Save up to 80% vs. hyperscalers. / Move data as often as you want."
 //
-// Three beats — 64 frames each + 28 fr hold on Beat 3:
-//   Beat 1  0–64    Exit path opens — no fee
-//   Beat 2  64–128  S3 marker snaps in
-//   Beat 3  128–220 Proof ledger resolves (extra hold for resolution to land)
+// Four beats — 64 frames each:
+//   Beat 1  0–64    Brand intro — Meet Akave Cloud + logo
+//   Beat 2  64–128  Zero egress — open exit path
+//   Beat 3  128–192 Cost savings — 80% callout
+//   Beat 4  192–256 Data freedom — open exit (bvOpen, holds to end)
 //
-// No logo/tile in this scene — product claims speak for themselves.
-// Logo appears once in Scene 7 (end card).
+// Headline position: top 120 (consistent with Scene 2 and Scene 5)
+// All claims: 68px — same as every other scene headline
 // ================================================================
 
 import {
   AbsoluteFill,
-  Easing,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import { COLORS, COPY } from "../config";
 import { ExitFrame } from "../primitives/ExitFrame";
-import { LedgerLine } from "../primitives/LedgerLine";
 import { SceneContainer } from "../primitives/SceneContainer";
 import { fontFamily } from "../font";
 
@@ -46,42 +47,40 @@ export const Scene4 = () => {
 
   const b1 = bv(frame, 0, BEAT);
   const b2 = bv(frame, BEAT, BEAT * 2);
-  const b3 = bvOpen(frame, BEAT * 2);
+  const b3 = bv(frame, BEAT * 2, BEAT * 3);
+  const b4 = bvOpen(frame, BEAT * 3);
 
-  // ---- Beat 1: Zero egress ----
-  const exitIn = spring({ frame: frame - 14, fps, config: { damping: 200 }, durationInFrames: 24 });
+  // Beat 1: logo springs in with slight delay after headline
+  const logoIn = spring({ frame: frame - 16, fps, config: { damping: 200 }, durationInFrames: 22 });
 
-  // ---- Beat 2: S3 ----
-  const s3In = spring({
-    frame: frame - BEAT - 14,
-    fps,
-    config: { damping: 14, stiffness: 200 }, // snappy arrival
-    durationInFrames: 18,
-  });
-  const s3Scale = interpolate(s3In, [0, 1], [0.7, 1]);
+  // Beat 2: exit path diagram
+  const exitIn = spring({ frame: frame - BEAT - 14, fps, config: { damping: 200 }, durationInFrames: 24 });
 
-  // ---- Beat 3: Ledger resolves ----
-  const ledgerIn = spring({ frame: frame - BEAT * 2 - 12, fps, config: { damping: 200 }, durationInFrames: 24 });
-  const resolveProgress = interpolate(frame, [BEAT * 2 + 20, BEAT * 2 + 52], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.inOut(Easing.quad),
-  });
+  // Beat 3: savings number
+  const savingsIn = spring({ frame: frame - BEAT * 2 - 14, fps, config: { damping: 200 }, durationInFrames: 22 });
 
-  const diagramStyle: React.CSSProperties = {
+  // Beat 4: open exit for freedom beat
+  const freedomIn = spring({ frame: frame - BEAT * 3 - 14, fps, config: { damping: 200 }, durationInFrames: 24 });
+
+  // Headline pinned at top: 120 — matches Scene 2 and Scene 5
+  const headlineWrap: React.CSSProperties = {
+    position: "absolute",
+    top: 120,
+    left: 0,
+    right: 0,
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   };
 
   const claimStyle: React.CSSProperties = {
     fontFamily,
-    fontSize: 72,
+    fontSize: 68,
     fontWeight: 300,
     color: COLORS.white,
     letterSpacing: "-0.025em",
     textAlign: "center",
-    lineHeight: 1.2,
+    lineHeight: 1.25,
+    maxWidth: 900,
   };
 
   const subStyle: React.CSSProperties = {
@@ -91,104 +90,117 @@ export const Scene4 = () => {
     color: COLORS.whiteDim,
     letterSpacing: "0.01em",
     textAlign: "center",
-    marginTop: 16,
+    marginTop: 18,
   };
+
+  // Diagrams anchor consistently below the headline
+  const diagramTop = 360;
 
   return (
     <SceneContainer>
       {/* ================================================================
-          BEAT 1 — Zero egress
+          BEAT 1 — Meet Akave Cloud
       ================================================================ */}
-      <AbsoluteFill
-        style={{
-          opacity: b1,
-          ...diagramStyle,
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ ...claimStyle }}>{COPY.scene4.egress}</div>
-        {/* Exit frame — no fee token */}
+      <AbsoluteFill style={{ opacity: b1 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene4.meet}</div>
+        </div>
         <div
           style={{
-            marginTop: 40,
-            opacity: interpolate(exitIn, [0, 1], [0, 1]),
-            transform: `scale(${interpolate(exitIn, [0, 1], [0.8, 1])})`,
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: "translateX(-50%)",
+            opacity: interpolate(logoIn, [0, 1], [0, 1]),
+          }}
+        >
+          <Img
+            src={staticFile("akave-logo-white.png")}
+            style={{ width: 260 }}
+          />
+        </div>
+      </AbsoluteFill>
+
+      {/* ================================================================
+          BEAT 2 — Zero egress fees
+      ================================================================ */}
+      <AbsoluteFill style={{ opacity: b2 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene4.egress}</div>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(exitIn, [0, 1], [0.8, 1])})`,
+            opacity: exitIn,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <ExitFrame size={90} color={COLORS.highlight} />
+          <div style={subStyle}>{COPY.scene4.egressSub}</div>
         </div>
-        <div style={{ ...subStyle, marginTop: 20 }}>{COPY.scene4.egressSub}</div>
       </AbsoluteFill>
 
       {/* ================================================================
-          BEAT 2 — S3-compatible
+          BEAT 3 — Save up to 80% vs. hyperscalers
       ================================================================ */}
-      <AbsoluteFill
-        style={{ opacity: b2, ...diagramStyle, flexDirection: "column" }}
-      >
-        <div style={claimStyle}>{COPY.scene4.s3}</div>
-        {/* S3 badge */}
+      <AbsoluteFill style={{ opacity: b3 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene4.savings}</div>
+        </div>
         <div
           style={{
-            marginTop: 40,
-            transform: `scale(${s3Scale})`,
-            opacity: interpolate(s3In, [0, 1], [0, 1]),
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(savingsIn, [0, 1], [0.85, 1])})`,
+            opacity: savingsIn,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <svg width={140} height={52} viewBox="0 0 140 52">
-            <rect
-              x={2}
-              y={2}
-              width={136}
-              height={48}
-              rx={10}
-              fill="rgba(176,229,255,0.06)"
-              stroke={COLORS.highlight}
-              strokeWidth={2}
-            />
-            <text
-              x={70}
-              y={33}
-              textAnchor="middle"
-              fill={COLORS.highlight}
-              fontSize={20}
-              fontWeight="500"
-              letterSpacing="0.08em"
-              fontFamily={fontFamily}
-            >
-              {COPY.scene4.s3Badge}
-            </text>
-          </svg>
+          <div
+            style={{
+              fontFamily,
+              fontSize: 100,
+              fontWeight: 300,
+              color: COLORS.highlight,
+              letterSpacing: "-0.04em",
+              lineHeight: 1,
+            }}
+          >
+            80%
+          </div>
+          <div style={subStyle}>{COPY.scene4.savingsSub}</div>
         </div>
-        <div style={{ ...subStyle, marginTop: 20 }}>{COPY.scene4.s3Sub}</div>
       </AbsoluteFill>
 
       {/* ================================================================
-          BEAT 3 — Proof ledger
+          BEAT 4 — Move data as often as you want
       ================================================================ */}
-      <AbsoluteFill
-        style={{ opacity: b3, ...diagramStyle, flexDirection: "column" }}
-      >
-        <div style={{ ...claimStyle, fontSize: 58, maxWidth: 860 }}>
-          {COPY.scene4.proof}
+      <AbsoluteFill style={{ opacity: b4 }}>
+        <div style={headlineWrap}>
+          <div style={claimStyle}>{COPY.scene4.freedom}</div>
         </div>
         <div
           style={{
-            marginTop: 42,
-            opacity: interpolate(ledgerIn, [0, 1], [0, 1]),
-            transform: `scale(${interpolate(ledgerIn, [0, 1], [0.9, 1])})`,
+            position: "absolute",
+            top: diagramTop,
+            left: "50%",
+            transform: `translateX(-50%) scale(${interpolate(freedomIn, [0, 1], [0.8, 1])})`,
+            opacity: freedomIn,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <LedgerLine
-            nodeCount={5}
-            brokenAt={-1}
-            breakProgress={0}
-            width={480}
-            resolved={resolveProgress > 0.6}
-          />
-        </div>
-        <div style={{ ...subStyle, marginTop: 20, color: resolveProgress > 0.6 ? "#7AFFC4" : COLORS.whiteDim }}>
-          {resolveProgress > 0.6 ? COPY.scene4.proofVerified : COPY.scene4.proofVerifying}
+          <ExitFrame size={90} color={COLORS.highlight} blocked={false} />
+          <div style={subStyle}>{COPY.scene4.freedomSub}</div>
         </div>
       </AbsoluteFill>
     </SceneContainer>

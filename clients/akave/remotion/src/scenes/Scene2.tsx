@@ -91,7 +91,7 @@ export const Scene2 = () => {
 
   const headlineStyle: React.CSSProperties = {
     fontFamily,
-    fontSize: 58,
+    fontSize: 68,
     fontWeight: 300,
     color: COLORS.white,
     letterSpacing: "-0.022em",
@@ -110,7 +110,7 @@ export const Scene2 = () => {
         <div
           style={{
             position: "absolute",
-            top: 100,
+            top: 120,
             left: 0,
             right: 0,
             textAlign: "center",
@@ -208,7 +208,7 @@ export const Scene2 = () => {
           BEAT 2 — The audit turns into guesswork
       ================================================================ */}
       <AbsoluteFill style={{ opacity: b2 }}>
-        <div style={{ position: "absolute", top: 100, left: 0, right: 0, textAlign: "center" }}>
+        <div style={{ position: "absolute", top: 120, left: 0, right: 0, textAlign: "center" }}>
           <div style={headlineStyle}>{COPY.scene2.beat2}</div>
         </div>
 
@@ -252,8 +252,8 @@ export const Scene2 = () => {
           BEAT 3 — Every exit gets taxed
       ================================================================ */}
       <AbsoluteFill style={{ opacity: b3 }}>
-        <div style={{ position: "absolute", top: 100, left: 0, right: 0, textAlign: "center" }}>
-          <div style={{ ...headlineStyle, fontSize: 52 }}>{COPY.scene2.beat3}</div>
+        <div style={{ position: "absolute", top: 120, left: 0, right: 0, textAlign: "center" }}>
+          <div style={headlineStyle}>{COPY.scene2.beat3}</div>
         </div>
 
         {/* Layout: StorageBlock — path+packet+feeToken — ExitFrame */}

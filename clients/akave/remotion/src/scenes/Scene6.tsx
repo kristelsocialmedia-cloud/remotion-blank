@@ -1,15 +1,14 @@
 // ================================================================
 // SCENE 6 — Closing Promise  (165 frames / 5.5 s)
-// VO: "Run AI without lock-in. / Own your data. /
-//      A modern S3-Compatible object storage."
+// VO: "Run AI without lock-in. / Save up 80%. / Own your data."
 //
-// Pure typography. Three lines appear sequentially — no competing visuals.
-// NOTE: p3 uses a smaller font size (52px) because it is a longer string.
+// Pure typography. Three short lines appear sequentially — no competing visuals.
+// All lines: 68px (consistent with all other scene headlines).
 //
 // TIMING:
 //   0–15   Line 1 "Run AI without lock-in."
-//   42–57  Line 2 "Own your data."
-//   84–99  Line 3 "A modern S3-Compatible object storage."
+//   42–57  Line 2 "Save up 80%."
+//   84–99  Line 3 "Own your data."
 // ================================================================
 
 import {
@@ -30,8 +29,6 @@ export const Scene6 = () => {
   const line2In = spring({ frame: frame - 42, fps, config: { damping: 200 }, durationInFrames: 22 });
   const line3In = spring({ frame: frame - 84, fps, config: { damping: 200 }, durationInFrames: 22 });
 
-  // size defaults to 68; pass a smaller value for longer strings to keep
-  // every line on a single row within the 1280px canvas.
   const mkStyle = (progress: number, dim: boolean, size = 68): React.CSSProperties => ({
     fontFamily,
     fontSize: size,
@@ -72,8 +69,7 @@ export const Scene6 = () => {
     >
       <div style={mkStyle(line1In, p1Dim)}>{COPY.scene6.p1}</div>
       <div style={mkStyle(line2In, p2Dim)}>{COPY.scene6.p2}</div>
-      {/* p3 is a longer descriptor string — 52px balances it against the lines above */}
-      <div style={mkStyle(line3In, false, 52)}>{COPY.scene6.p3}</div>
+      <div style={mkStyle(line3In, false)}>{COPY.scene6.p3}</div>
     </AbsoluteFill>
   );
 };
